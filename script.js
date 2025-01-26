@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const addButton = document.getElementById('add-task-btn'); // Button to add tasks
   const taskInput = document.getElementById('task-input'); // Input field for tasks
   const taskList = document.getElementById('task-list'); // List to display tasks
+const addTaskButton = document.getElementById('addTaskButton'); // Button to add tasks
 
   // Function to add a task
   function addTask() {
@@ -27,16 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Optional: Set inline styles for the button
     removeButton.style.backgroundColor = 'red';
-    removeButton.style.color = 'white';
-    removeButton.style.border = 'none';
-    removeButton.style.borderRadius = '3px';
-    removeButton.style.marginLeft = '10px';
-    removeButton.style.cursor = 'pointer';
+removeButton.style.color = 'white';
+removeButton.style.border = 'none';
+removeButton.style.cursor = 'pointer';
+
 
     // Add functionality to remove the task
     removeButton.onclick = () => {
       taskList.removeChild(taskItem);
     };
+
+// Set up the remove functionality
+removeButton.onclick = () => {
+  taskList.removeChild(li); // Remove the li element from the list
+};
+
+
+
 
     // Append the button to the task item
     taskItem.appendChild(removeButton);
@@ -57,6 +65,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
 
       
