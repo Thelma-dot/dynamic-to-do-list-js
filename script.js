@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const addButton = document.getElementById('add-task-btn'); // Button to add tasks
   const taskInput = document.getElementById('task-input'); // Input field for tasks
   const taskList = document.getElementById('task-list'); // List to display tasks
-const addTaskButton = document.getElementById('addTaskButton'); // Button to add tasks
 
   // Function to add a task
   function addTask() {
@@ -28,23 +27,14 @@ const addTaskButton = document.getElementById('addTaskButton'); // Button to add
 
     // Optional: Set inline styles for the button
     removeButton.style.backgroundColor = 'red';
-removeButton.style.color = 'white';
-removeButton.style.border = 'none';
-removeButton.style.cursor = 'pointer';
-
+    removeButton.style.color = 'white';
+    removeButton.style.border = 'none';
+    removeButton.style.cursor = 'pointer';
 
     // Add functionality to remove the task
     removeButton.onclick = () => {
-      taskList.removeChild(taskItem);
+      taskList.removeChild(taskItem); // Remove the specific <li> from the list
     };
-
-// Set up the remove functionality
-removeButton.onclick = () => {
-  taskList.removeChild(li); // Remove the li element from the list
-};
-
-
-
 
     // Append the button to the task item
     taskItem.appendChild(removeButton);
@@ -59,11 +49,10 @@ removeButton.onclick = () => {
   // Attach event listeners
   addButton.addEventListener('click', addTask);
 
+  // Allow pressing "Enter" to add a task
   taskInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
       addTask();
     }
   });
 });
-
-      
