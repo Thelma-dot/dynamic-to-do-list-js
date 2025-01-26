@@ -5,6 +5,65 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
+
+
+  // Function to load tasks from Local Storage
+  function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    storedTasks.forEach(taskText => addTask(taskText, false));
+}
+
+// Function to add a task
+function addTask(taskText, save = true) {
+  // Create task list item
+  const taskItem = document.createElement('li');
+  taskItem.className = 'taskItem';
+
+  const taskContent = document.createElement('span');
+  taskContent.textContent = taskText;
+  taskItem.appendChild(taskContent);
+
+  // Create remove button
+  const removeButton = document.createElement('button');
+  removeButton.textContent = 'Remove';
+  removeButton.className = 'removeButton';
+  removeButton.addEventListener('click', () => {
+      taskList.removeChild(taskItem);
+      removeTask(taskText);
+  });
+  taskItem.appendChild(removeButton);
+
+  // Append task to the list
+  taskList.appendChild(taskItem);
+
+  // Save task to Local Storage
+  if (save) {
+      const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+      storedTasks.push(taskText);
+      localStorage.setItem('tasks', JSON.stringify(storedTasks));
+  }
+}
+
+// Function to remove a task
+function removeTask(taskText) {
+  const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  const updatedTasks = storedTasks.filter(task => task !== taskText);
+  localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+}
+
+// Add task event listener
+addTaskButton.addEventListener('click', () => {
+  const taskText = taskInput.value.trim();
+  if (taskText) {
+      addTask(taskText);
+      taskInput.value = ''; // Clear the input field
+  }
+});
+
+// Load tasks when the page loads
+loadTasks();
+});
+
   // Function to add a new task
   function addTask() {
       // Get and trim the input value
@@ -49,4 +108,4 @@ document.addEventListener('DOMContentLoaded', () => {
           addTask();
       }
   });
-});
+
